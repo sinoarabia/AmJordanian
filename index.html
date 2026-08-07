@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmJordanian | Leaders of Industry</title>
+    <style>
+        /* ================= Color Palette & Reset ================= */
+        :root {
+            --primary-navy: #0F2027;
+            --secondary-navy: #203A43;
+            --jordan-gold: #D4AF37;
+            --light-gold: #F9F6EE;
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+            --transition: all 0.3s ease;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Tajawal', Tahoma, Geneva, sans-serif; }
+        body { background-color: #F4F7F6; color: var(--text-dark); line-height: 1.6; transition: var(--transition); }
+
+        /* RTL Support for Arabic */
+        html[dir="rtl"] { font-family: 'Tajawal', 'Cairo', Arial, sans-serif; }
+        html[dir="rtl"] .section-title { border-left: none; border-right: 5px solid var(--jordan-gold); padding-left: 0; padding-right: 15px; }
+        html[dir="rtl"] .close-btn { right: auto; left: 25px; }
+
+        /* ================= Top Bar (Email Submission) ================= */
+        .top-bar { background-color: var(--jordan-gold); color: var(--primary-navy); text-align: center; padding: 10px 20px; font-weight: bold; font-size: 0.95rem; }
+        .top-bar a { color: var(--primary-navy); text-decoration: none; border-bottom: 1px solid var(--primary-navy); }
+
+        /* ================= Header ================= */
+        header { background: linear-gradient(to right, var(--primary-navy), var(--secondary-navy)); padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--jordan-gold); }
+        .logo-container { display: flex; flex-direction: column; }
+        .logo { color: var(--jordan-gold); font-size: 28px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; }
+        .logo-sub { color: #fff; font-size: 13px; opacity: 0.8; }
+        .lang-btn { background: transparent; border: 1px solid var(--jordan-gold); color: var(--jordan-gold); padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: var(--transition); }
+        .lang-btn:hover { background: var(--jordan-gold); color: var(--primary-navy); }
+
+        /* ================= Hero Section ================= */
+        .hero { text-align: center; padding: 80px 20px; background-color: var(--primary-navy); color: var(--text-light); }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--jordan-gold); }
+        .hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto; opacity: 0.9; }
+
+        /* ================= Grid & Cards ================= */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .industry-section { margin-bottom: 60px; }
+        .section-title { font-size: 2rem; color: var(--primary-navy); border-left: 5px solid var(--jordan-gold); padding-left: 15px; margin-bottom: 30px; display: flex; align-items: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 4px solid transparent; transition: var(--transition); cursor: pointer; }
+        .card:hover { transform: translateY(-10px); border-top: 4px solid var(--jordan-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .card-img { height: 220px; background-size: cover; background-position: center; background-color: #ddd; }
+        .card-content { padding: 25px; text-align: center; }
+        .chairman-name { font-size: 1.4rem; color: var(--primary-navy); margin-bottom: 5px; }
+        .chairman-title { font-size: 0.95rem; color: #666; margin-bottom: 15px; font-weight: 500; }
+        .btn-view { display: inline-block; padding: 10px 20px; background: var(--light-gold); color: var(--primary-navy); border: 1px solid var(--jordan-gold); border-radius: 4px; text-decoration: none; font-weight: bold; transition: var(--transition); }
+        .card:hover .btn-view { background: var(--jordan-gold); color: #fff; }
+
+        /* ================= Modal ================= */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 32, 39, 0.9); display: none; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+        .modal-content { background: #fff; width: 100%; max-width: 900px; max-height: 90vh; overflow-y: auto; border-radius: 8px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); position: relative; display: flex; flex-direction: column; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; cursor: pointer; color: var(--text-light); z-index: 10; transition: var(--transition); }
+        .close-btn:hover { color: var(--jordan-gold); }
+        
+        .modal-header { background: var(--primary-navy); color: #fff; padding: 40px; text-align: center; border-bottom: 3px solid var(--jordan-gold); }
+        .modal-header h2 { font-size: 2.2rem; color: var(--jordan-gold); }
+        .modal-header p { font-size: 1.1rem; opacity: 0.8; margin-top: 5px; }
+
+        .tabs { display: flex; background: var(--light-gold); border-bottom: 1px solid #ddd; }
+        .tab { flex: 1; padding: 15px; text-align: center; font-weight: bold; cursor: pointer; color: var(--primary-navy); transition: var(--transition); }
+        .tab:hover { background: rgba(212, 175, 55, 0.1); }
+        .tab.active { background: #fff; color: var(--jordan-gold); border-bottom: 3px solid var(--jordan-gold); }
+        
+        .tab-content { padding: 40px; display: none; animation: fadeIn 0.4s ease; min-height: 250px; }
+        .tab-content.active { display: block; }
+        .tab-content h3 { color: var(--primary-navy); margin-bottom: 15px; font-size: 1.5rem; }
+        .tab-content p { color: #444; font-size: 1.1rem; line-height: 1.8; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* ================= Footer ================= */
+        footer { background: var(--primary-navy); color: #fff; text-align: center; padding: 30px; margin-top: 50px; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Email Submission Bar -->
+    <div class="top-bar" id="top-bar-text">
+        For article submission and publication, contact email: <a href="mailto:edudarling@gmail.com">edudarling@gmail.com</a>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo">AmJordanian</div>
+            <div class="logo-sub" id="header-sub">The Global Network of Jordanian Excellence</div>
+        </div>
+        <button class="lang-btn" onclick="toggleLanguage()" id="lang-btn">عربي / AR</button>
+    </header>
+
+    <div class="hero">
+        <h1 id="hero-title">Leading Jordan, Connecting the World</h1>
+        <p id="hero-desc">Exclusive insights and press coverage of top industry leaders in Construction, F&B, and Tourism, driving Jordan's modern economic vision.</p>
+    </div>
+
+    <div class="container" id="main-container">
+        <!-- Grid dynamically injected by JS -->
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="m-name">Name</h2>
+                <p id="m-title">Title</p>
+            </div>
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('visionary')" id="tab-btn-visionary">The Visionary</div>
+                <div class="tab" onclick="switchTab('ground')" id="tab-btn-ground">On the Ground</div>
+                <div class="tab" onclick="switchTab('global')" id="tab-btn-global">Global Bridges</div>
+            </div>
+            
+            <div class="tab-content active" id="tab-visionary">
+                <h3 id="m-h3-visionary">The Visionary</h3>
+                <p id="m-visionary"></p>
+            </div>
+            <div class="tab-content" id="tab-ground">
+                <h3 id="m-h3-ground">On the Ground</h3>
+                <p id="m-ground"></p>
+            </div>
+            <div class="tab-content" id="tab-global">
+                <h3 id="m-h3-global">Global Bridges</h3>
+                <p id="m-global"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer id="footer-text">
+        &copy; 2026 AmJordanian.com. All Rights Reserved. The Exclusive PR Portal for Jordanian Business Leaders.
+    </footer>
+
+    <script>
+        // ================= Multilingual Database =================
+        const staticText = {
+            en: {
+                topBar: 'For article submission and publication, contact email: <a href="mailto:edudarling@gmail.com">edudarling@gmail.com</a>',
+                headerSub: 'The Global Network of Jordanian Excellence',
+                heroTitle: 'Leading Jordan, Connecting the World',
+                heroDesc: 'Exclusive insights and press coverage of top industry leaders in Construction, F&B, and Tourism, driving Jordan\'s modern economic vision.',
+                viewBtn: 'Read Exclusive Cover',
+                tabVisionary: 'The Visionary',
+                tabGround: 'On the Ground',
+                tabGlobal: 'Global Bridges',
+                footer: '&copy; 2026 AmJordanian.com. All Rights Reserved. The Exclusive PR Portal for Jordanian Business Leaders.'
+            },
+            ar: {
+                topBar: 'لتقديم ونشر المقالات الصحفية، يرجى التواصل عبر البريد الإلكتروني: <a href="mailto:edudarling@gmail.com">edudarling@gmail.com</a>',
+                headerSub: 'الشبكة العالمية للتميز الأردني',
+                heroTitle: 'قيادة الأردن، وربط العالم',
+                heroDesc: 'رؤى حصرية وتغطية صحفية لكبار قادة الصناعة في قطاعات البناء، المطاعم، والسياحة، لدفع الرؤية الاقتصادية الحديثة للأردن.',
+                viewBtn: 'اقرأ التغطية الحصرية',
+                tabVisionary: 'رؤية القائد',
+                tabGround: 'على أرض الواقع',
+                tabGlobal: 'جسور عالمية',
+                footer: '&copy; 2026 AmJordanian.com. جميع الحقوق محفوظة. البوابة الإعلامية الحصرية لقادة الأعمال في الأردن.'
+            }
+        };
+
+        const chairmenData = [
+            // --- Construction & Infrastructure ---
+            {
+                id: 1, img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Construction & Infrastructure', industryAR: 'البناء والبنية التحتية',
+                nameEN: 'Eng. Ziad Al-Manaseer', nameAR: 'المهندس زياد المناصير',
+                titleEN: 'Chairman | Manaseer Group', titleAR: 'رئيس مجلس الإدارة | مجموعة المناصير',
+                visionaryEN: 'Leading the modernization of Jordan’s infrastructure through sustainable mega-projects and advanced industrial investments.',
+                visionaryAR: 'قيادة تحديث البنية التحتية في الأردن من خلال مشاريع عملاقة ومستدامة واستثمارات صناعية متقدمة.',
+                groundEN: 'Regularly inspects heavy industrial plants and national highway expansions, ensuring absolute operational efficiency and job creation for local communities.',
+                groundAR: 'يتفقد بانتظام المصانع الصناعية الثقيلة وتوسعات الطرق السريعة الوطنية، مما يضمن الكفاءة التشغيلية المطلقة وخلق فرص عمل للمجتمعات المحلية.',
+                globalEN: 'Forging strategic alliances with European engineering firms to bring cutting-edge construction technology and foreign direct investment to Amman.',
+                globalAR: 'إقامة تحالفات استراتيجية مع شركات هندسية أوروبية لجلب أحدث تقنيات البناء والاستثمار الأجنبي المباشر إلى عمّان.'
+            },
+            {
+                id: 2, img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Construction & Infrastructure', industryAR: 'البناء والبنية التحتية',
+                nameEN: 'Khaled Al-Masri', nameAR: 'خالد المصري',
+                titleEN: 'Chairman | Astra Group', titleAR: 'رئيس مجلس الإدارة | مجموعة أسترا',
+                visionaryEN: 'Driving urban development by transforming Amman’s skyline with premium commercial complexes and high-end residential real estate.',
+                visionaryAR: 'دفع عجلة التنمية الحضرية من خلال تحويل أفق مدينة عمّان بمجمعات تجارية فاخرة وعقارات سكنية راقية.',
+                groundEN: 'Personally oversees the architectural planning phases, rejecting automated layouts to mandate specific workspace orientations that maximize productivity and aesthetics.',
+                groundAR: 'يشرف شخصياً على مراحل التخطيط المعماري، ويرفض التصاميم الآلية ليفرض توجيهات دقيقة لمساحات العمل تزيد من الإنتاجية والجمالية.',
+                globalEN: 'Positioning Jordan as a regional corporate hub by developing world-class headquarter facilities that attract multinational corporations.',
+                globalAR: 'وضع الأردن كمركز إقليمي للشركات من خلال تطوير مقرات عالمية المستوى تجذب الشركات متعددة الجنسيات.'
+            },
+            {
+                id: 3, img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Construction & Infrastructure', industryAR: 'البناء والبنية التحتية',
+                nameEN: 'Osama Al-Khatib', nameAR: 'أسامة الخطيب',
+                titleEN: 'CEO | Middle East Joint Ventures (JV)', titleAR: 'الرئيس التنفيذي | مشاريع الشرق الأوسط المشتركة',
+                visionaryEN: 'Believes that future commercial spaces are carriers of cross-cultural cooperation, focusing on rapid mobilization of international joint venture operations.',
+                visionaryAR: 'يؤمن بأن المساحات التجارية المستقبلية هي نواقل للتعاون عبر الثقافات، مع التركيز على التعبئة السريعة لعمليات المشاريع الدولية المشتركة.',
+                groundEN: 'Directly manages logistics for incoming foreign corporate teams, securing high-standard dormitories, office furnishings, and local supply chains in Amman.',
+                groundAR: 'يدير بشكل مباشر الخدمات اللوجستية لفرق الشركات الأجنبية القادمة، ويؤمن مساكن عالية المستوى وتجهيزات مكتبية وسلاسل توريد محلية في عمّان.',
+                globalEN: 'Coordinates seamlessly with Asian and Western stakeholders to ensure massive infrastructure joint ventures operate without cross-cultural friction.',
+                globalAR: 'ينسق بسلاسة مع الشركاء الآسيويين والغربيين لضمان تشغيل المشاريع المشتركة الضخمة للبنية التحتية دون أي احتكاك ثقافي.'
+            },
+
+            // --- Catering & F&B ---
+            {
+                id: 4, img: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Catering & F&B', industryAR: 'المطاعم والضيافة',
+                nameEN: 'Ahmad Zalatimo', nameAR: 'أحمد زلاطيمو',
+                titleEN: 'Chairman | Zalatimo Brothers', titleAR: 'رئيس مجلس الإدارة | إخوان زلاطيمو',
+                visionaryEN: 'Preserving Jordan’s rich culinary heritage while elevating traditional Arabian sweets to the absolute pinnacle of luxury gifting.',
+                visionaryAR: 'الحفاظ على التراث الطهوي الغني للأردن مع الارتقاء بالحلويات العربية التقليدية إلى قمة الهدايا الفاخرة.',
+                groundEN: 'Maintains rigorous quality control over factory floors, ensuring every royal tin and wooden box meets the exacting standards expected by Middle Eastern royalty and elite families.',
+                groundAR: 'يحافظ على رقابة صارمة على الجودة في المصانع، لضمان أن تلبي كل علبة خشبية أو معدنية المعايير الدقيقة التي تتوقعها العائلات المالكة والنخبة في الشرق الأوسط.',
+                globalEN: 'Successfully established the brand as the quintessential Jordanian corporate gift worldwide, shipping premium heritage products across the GCC and Europe.',
+                globalAR: 'نجح في ترسيخ العلامة التجارية كهدية مؤسسية أردنية بامتياز على مستوى العالم، وتصدير المنتجات التراثية الفاخرة عبر دول الخليج وأوروبا.'
+            },
+            {
+                id: 5, img: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Catering & F&B', industryAR: 'المطاعم والضيافة',
+                nameEN: 'Zaid Goussous', nameAR: 'زيد قسوس',
+                titleEN: 'Founder | Romero Group', titleAR: 'المؤسس | مجموعة روميرو',
+                visionaryEN: 'Pioneering fine dining in Jordan by creating immersive culinary experiences that blend authentic local flavors with international gastronomy standards.',
+                visionaryAR: 'ريادة المطاعم الفاخرة في الأردن من خلال خلق تجارب طهوية غامرة تمزج النكهات المحلية الأصيلة مع معايير فنون الطهي العالمية.',
+                groundEN: 'Personally curated the menus and ambiance for Amman’s most prestigious dining venues, setting the benchmark for diplomatic and executive business dinners.',
+                groundAR: 'أشرف شخصياً على إعداد قوائم الطعام والأجواء لأفخم المطاعم في عمّان، مما وضع معياراً جديداً لعشاء الدبلوماسيين وكبار المديرين التنفيذيين.',
+                globalEN: 'Partnering with globally renowned chefs to elevate Jordan’s culinary scene, attracting international food critics and culinary tourism.',
+                globalAR: 'الشراكة مع طهاة عالميين مشهورين للارتقاء بمشهد الطهي في الأردن، وجذب نقاد الطعام الدوليين وسياحة الطهي.'
+            },
+            {
+                id: 6, img: 'https://images.unsplash.com/photo-1583160247711-2191776b4b91?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Catering & F&B', industryAR: 'المطاعم والضيافة',
+                nameEN: 'Omar Al-Bateel', nameAR: 'عمر البتيل',
+                titleEN: 'Director | Premium F&B Supply', titleAR: 'المدير | توريد الأغذية الفاخرة',
+                visionaryEN: 'Transforming the logistics of luxury corporate catering, ensuring flawless execution for high-profile weddings and multinational corporate events.',
+                visionaryAR: 'تحويل اللوجستيات الخاصة بتموين الشركات الفاخرة، وضمان التنفيذ الخالي من العيوب لحفلات الزفاف الراقية والفعاليات المؤسسية متعددة الجنسيات.',
+                groundEN: 'Negotiates stringent corporate service drafts, ensuring precise full-board authentic culinary requirements are met for demanding international delegations.',
+                groundAR: 'يتفاوض على مسودات خدمات الشركات الصارمة، مما يضمن تلبية متطلبات الطهي الأصيلة والدقيقة للوفود الدولية المتطلبة.',
+                globalEN: 'Bridges international food supply chains with local execution, delivering world-class bespoke dining logistics across the MENA region.',
+                globalAR: 'يربط سلاسل توريد الأغذية الدولية بالتنفيذ المحلي، ويقدم لوجستيات طعام مخصصة عالمية المستوى في جميع أنحاء منطقة الشرق الأوسط وشمال أفريقيا.'
+            },
+
+            // --- Tourism & Hospitality ---
+            {
+                id: 7, img: 'https://images.unsplash.com/photo-1542314831-c6a4d27160c9?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Tourism & Hospitality', industryAR: 'السياحة والفنادق',
+                nameEN: 'Nadim Muasher', nameAR: 'نديم المعشر',
+                titleEN: 'Chairman | Arab International Hotels', titleAR: 'رئيس مجلس الإدارة | الفنادق العربية الدولية',
+                visionaryEN: 'Elevating Jordan’s hospitality sector by spearheading the development of iconic five-star international hotel franchises in Amman and the Dead Sea.',
+                visionaryAR: 'الارتقاء بقطاع الضيافة في الأردن من خلال قيادة تطوير امتيازات الفنادق الدولية الشهيرة من فئة الخمس نجوم في عمّان والبحر الميت.',
+                groundEN: 'Closely monitors guest experience metrics across flagship properties, ensuring traditional Jordanian hospitality perfectly complements global luxury standards.',
+                groundAR: 'يراقب عن كثب مقاييس تجربة الضيوف عبر العقارات الرائدة، مما يضمن أن الضيافة الأردنية التقليدية تكمل بشكل مثالي معايير الفخامة العالمية.',
+                globalEN: 'Plays a pivotal role in the Jordan Tourism Board, aggressively marketing the Kingdom to high-net-worth investors and global luxury travel networks.',
+                globalAR: 'يلعب دوراً محورياً في هيئة تنشيط السياحة الأردنية، ويسوق بقوة للمملكة أمام المستثمرين ذوي الملاءة المالية العالية وشبكات السفر الفاخرة العالمية.'
+            },
+            {
+                id: 8, img: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Tourism & Hospitality', industryAR: 'السياحة والفنادق',
+                nameEN: 'Michael Nazzal', nameAR: 'ميشيل نزال',
+                titleEN: 'Chairman | Jordan Hotel Association', titleAR: 'رئيس مجلس الإدارة | جمعية الفنادق الأردنية',
+                visionaryEN: 'A foundational pillar of Jordan’s tourism strategy, focusing on expanding eco-tourism and sustainable resort developments in Petra and Wadi Rum.',
+                visionaryAR: 'ركيزة أساسية لاستراتيجية السياحة في الأردن، مع التركيز على توسيع السياحة البيئية وتطوير المنتجعات المستدامة في البتراء ووادي رم.',
+                groundEN: 'Constantly lobbies for progressive tourism policies, working alongside governmental bodies to streamline visas and improve infrastructure for incoming tourist waves.',
+                groundAR: 'يضغط باستمرار من أجل سياسات سياحية تقدمية، ويعمل جنباً إلى جنب مع الهيئات الحكومية لتسهيل التأشيرات وتحسين البنية التحتية لموجات السياح القادمة.',
+                globalEN: 'Represents Jordan in global travel syndicates, ensuring the country remains a premier, safe, and culturally rich destination on the world map.',
+                globalAR: 'يمثل الأردن في نقابات السفر العالمية، مما يضمن بقاء البلاد وجهة رئيسية وآمنة وغنية ثقافياً على خريطة العالم.'
+            },
+            {
+                id: 9, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80',
+                industryEN: 'Tourism & Hospitality', industryAR: 'السياحة والفنادق',
+                nameEN: 'Majed Shocair', nameAR: 'ماجد شقير',
+                titleEN: 'CEO | Elite Travel & Corporate Management', titleAR: 'الرئيس التنفيذي | النخبة لإدارة السفر والشركات',
+                visionaryEN: 'Redefining corporate travel management by building seamless, technology-driven concierge services for executive expatriates and diplomats.',
+                visionaryAR: 'إعادة تعريف إدارة سفر الشركات من خلال بناء خدمات كونسيرج سلسة تعتمد على التكنولوجيا للمغتربين التنفيذيين والدبلوماسيين.',
+                groundEN: 'Supervises a vast fleet and VIP handling services, ensuring that from the moment a CEO lands at QAIA, their transition into Amman is absolutely frictionless.',
+                groundAR: 'يشرف على أسطول ضخم وخدمات كبار الشخصيات، مما يضمن أنه من لحظة هبوط أي مدير تنفيذي في مطار الملكة علياء، يكون انتقاله إلى عمّان سلساً تماماً.',
+                globalEN: 'Establishing exclusive B2B portals connecting Jordanian hospitality services directly with multinational corporate HR departments across Asia and Europe.',
+                globalAR: 'تأسيس بوابات أعمال حصرية (B2B) تربط خدمات الضيافة الأردنية مباشرة بأقسام الموارد البشرية للشركات متعددة الجنسيات عبر آسيا وأوروبا.'
+            }
+        ];
+
+        // ================= Core Logic =================
+        let currentLang = 'en';
+        let currentModalData = null;
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            updateStaticText();
+            renderGrid();
+            if (document.getElementById('modal').style.display === 'flex') {
+                updateModalText();
+            }
+        }
+
+        function updateStaticText() {
+            const texts = staticText[currentLang];
+            document.getElementById('top-bar-text').innerHTML = texts.topBar;
+            document.getElementById('header-sub').innerText = texts.headerSub;
+            document.getElementById('hero-title').innerText = texts.heroTitle;
+            document.getElementById('hero-desc').innerText = texts.heroDesc;
+            document.getElementById('footer-text').innerHTML = texts.footer;
+            document.getElementById('lang-btn').innerText = currentLang === 'en' ? 'عربي / AR' : 'English / EN';
+            
+            document.getElementById('tab-btn-visionary').innerText = texts.tabVisionary;
+            document.getElementById('tab-btn-ground').innerText = texts.tabGround;
+            document.getElementById('tab-btn-global').innerText = texts.tabGlobal;
+            document.getElementById('m-h3-visionary').innerText = texts.tabVisionary;
+            document.getElementById('m-h3-ground').innerText = texts.tabGround;
+            document.getElementById('m-h3-global').innerText = texts.tabGlobal;
+        }
+
+        function renderGrid() {
+            const container = document.getElementById('main-container');
+            container.innerHTML = ''; 
+            
+            const industriesEN = [...new Set(chairmenData.map(item => item.industryEN))];
+            
+            industriesEN.forEach(indEN => {
+                const sampleItem = chairmenData.find(item => item.industryEN === indEN);
+                const displayIndustry = currentLang === 'en' ? sampleItem.industryEN : sampleItem.industryAR;
+                
+                const section = document.createElement('div');
+                section.className = 'industry-section';
+                section.innerHTML = `<h2 class="section-title">${displayIndustry}</h2><div class="grid"></div>`;
+                
+                const grid = section.querySelector('.grid');
+                const filteredData = chairmenData.filter(item => item.industryEN === indEN);
+                
+                filteredData.forEach(person => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.onclick = () => openModal(person);
+                    
+                    const name = currentLang === 'en' ? person.nameEN : person.nameAR;
+                    const title = currentLang === 'en' ? person.titleEN : person.titleAR;
+                    const btnText = staticText[currentLang].viewBtn;
+
+                    card.innerHTML = `
+                        <div class="card-img" style="background-image: url('${person.img}')"></div>
+                        <div class="card-content">
+                            <h3 class="chairman-name">${name}</h3>
+                            <p class="chairman-title">${title}</p>
+                            <span class="btn-view">${btnText}</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+                container.appendChild(section);
+            });
+        }
+
+        function openModal(data) {
+            currentModalData = data;
+            updateModalText();
+            document.getElementById('modal').style.display = 'flex';
+            switchTab('visionary');
+        }
+
+        function updateModalText() {
+            if(!currentModalData) return;
+            document.getElementById('m-name').innerText = currentLang === 'en' ? currentModalData.nameEN : currentModalData.nameAR;
+            document.getElementById('m-title').innerText = currentLang === 'en' ? currentModalData.titleEN : currentModalData.titleAR;
+            document.getElementById('m-visionary').innerText = currentLang === 'en' ? currentModalData.visionaryEN : currentModalData.visionaryAR;
+            document.getElementById('m-ground').innerText = currentLang === 'en' ? currentModalData.groundEN : currentModalData.groundAR;
+            document.getElementById('m-global').innerText = currentLang === 'en' ? currentModalData.globalEN : currentModalData.globalAR;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            if(tabName === 'visionary') {
+                document.getElementById('tab-btn-visionary').classList.add('active');
+                document.getElementById('tab-visionary').classList.add('active');
+            } else if (tabName === 'ground') {
+                document.getElementById('tab-btn-ground').classList.add('active');
+                document.getElementById('tab-ground').classList.add('active');
+            } else if (tabName === 'global') {
+                document.getElementById('tab-btn-global').classList.add('active');
+                document.getElementById('tab-global').classList.add('active');
+            }
+        }
+
+        // Initialize
+        updateStaticText();
+        renderGrid();
+    </script>
+</body>
+</html>
