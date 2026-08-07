@@ -4,17 +4,9 @@
     <!-- ================= SEO & Encoding ================= -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- 优化标题，自然融入中文关键词，同时保持品牌调性 -->
     <title>AmJordanian | Leaders of Industry - 约旦新闻 | 约旦餐饮 | 约旦旅游 | 约旦建筑</title>
-    
-    <!-- 核心描述：中英双语，涵盖您要求的所有搜索维度 -->
     <meta name="description" content="The Global Network of Jordanian Excellence. Exclusive press coverage of top industry leaders. 深度探索约旦：汇集最新约旦新闻，精选约旦餐饮与中餐厅推荐，全方位约旦旅游攻略，以及独具视野的约旦建筑与商业空间规划。">
-    
-    <!-- 搜索关键词 -->
     <meta name="keywords" content="约旦新闻, 约旦餐饮, 约旦旅游, 约旦建筑, 安曼中餐厅, 约旦房地产, AmJordanian, Jordan News, Jordan Dining, Jordan Tourism, Jordan Architecture, أخبار الأردن, سياحة الأردن">
-    
-    <!-- 社交媒体分享卡片 (Open Graph) -->
     <meta property="og:title" content="AmJordanian | 约旦新闻、餐饮、旅游与建筑的终极指南">
     <meta property="og:description" content="Exclusive insights of top industry leaders in Construction, F&B, and Tourism. 探索约旦的商业领袖与精彩生活。">
     <meta property="og:type" content="website">
@@ -39,7 +31,7 @@
         html[dir="rtl"] .section-title { border-left: none; border-right: 5px solid var(--jordan-gold); padding-left: 0; padding-right: 15px; }
         html[dir="rtl"] .close-btn { right: auto; left: 25px; }
 
-        /* ================= Top Bar (Email Submission) ================= */
+        /* ================= Top Bar ================= */
         .top-bar { background-color: var(--jordan-gold); color: var(--primary-navy); text-align: center; padding: 10px 20px; font-weight: bold; font-size: 0.95rem; }
         .top-bar a { color: var(--primary-navy); text-decoration: none; border-bottom: 1px solid var(--primary-navy); }
 
@@ -56,19 +48,23 @@
         .hero h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--jordan-gold); }
         .hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto; opacity: 0.9; }
 
-        /* ================= Grid & Cards ================= */
+        /* ================= Grid & NEW Card Layout ================= */
         .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         .industry-section { margin-bottom: 60px; }
         .section-title { font-size: 2rem; color: var(--primary-navy); border-left: 5px solid var(--jordan-gold); padding-left: 15px; margin-bottom: 30px; display: flex; align-items: center; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         
-        .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 4px solid transparent; transition: var(--transition); cursor: pointer; }
+        .card { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 4px solid transparent; transition: var(--transition); cursor: pointer; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-10px); border-top: 4px solid var(--jordan-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
-        .card-img { height: 220px; background-size: cover; background-position: center; background-color: #ddd; }
-        .card-content { padding: 25px; text-align: center; }
+        
+        /* 新的卡片头部设计：深色背景 + 完美的圆形悬浮头像 */
+        .card-header { background: linear-gradient(to right, var(--secondary-navy), var(--primary-navy)); height: 100px; position: relative; border-bottom: 2px solid var(--jordan-gold); }
+        .card-avatar { width: 100px; height: 100px; background-color: var(--light-gold); border-radius: 50%; border: 4px solid #fff; position: absolute; bottom: -50px; left: 50%; transform: translateX(-50%); background-size: cover; background-position: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        .card-content { padding: 65px 25px 25px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between;}
         .chairman-name { font-size: 1.4rem; color: var(--primary-navy); margin-bottom: 5px; }
-        .chairman-title { font-size: 0.95rem; color: #666; margin-bottom: 15px; font-weight: 500; }
-        .btn-view { display: inline-block; padding: 10px 20px; background: var(--light-gold); color: var(--primary-navy); border: 1px solid var(--jordan-gold); border-radius: 4px; text-decoration: none; font-weight: bold; transition: var(--transition); }
+        .chairman-title { font-size: 0.95rem; color: #666; margin-bottom: 20px; font-weight: 500; }
+        .btn-view { display: inline-block; padding: 10px 20px; background: var(--light-gold); color: var(--primary-navy); border: 1px solid var(--jordan-gold); border-radius: 4px; text-decoration: none; font-weight: bold; transition: var(--transition); width: 100%; max-width: 200px; }
         .card:hover .btn-view { background: var(--jordan-gold); color: #fff; }
 
         /* ================= Modal ================= */
@@ -96,7 +92,7 @@
         /* ================= Footer ================= */
         footer { background: var(--primary-navy); color: #fff; text-align: center; padding: 30px; margin-top: 50px; font-size: 0.9rem; }
 
-        /* ================= 针对手机屏幕的专属优化 (Mobile Responsive Enhancements) ================= */
+        /* ================= Mobile Responsive Enhancements ================= */
         @media (max-width: 768px) {
             header { padding: 15px 20px; flex-direction: column; gap: 15px; text-align: center; }
             .hero { padding: 50px 15px; }
@@ -116,7 +112,6 @@
 </head>
 <body>
 
-    <!-- Email Submission Bar -->
     <div class="top-bar" id="top-bar-text">
         For article submission and publication, contact email: <a href="mailto:edudarling@gmail.com">edudarling@gmail.com</a>
     </div>
@@ -138,7 +133,6 @@
         <!-- Grid dynamically injected by JS -->
     </div>
 
-    <!-- Details Modal -->
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -172,7 +166,6 @@
     </footer>
 
     <script>
-        // ================= Multilingual Database =================
         const staticText = {
             en: {
                 topBar: 'For article submission and publication, contact email: <a href="mailto:edudarling@gmail.com">edudarling@gmail.com</a>',
@@ -198,10 +191,10 @@
             }
         };
 
+        // 已将所有照片替换为规避肖像权的高级“姓名首字母”头像 (UI Avatars)
         const chairmenData = [
-            // --- Construction & Infrastructure ---
             {
-                id: 1, img: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80',
+                id: 1, img: 'https://ui-avatars.com/api/?name=Ziad+Al-Manaseer&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Construction & Infrastructure', industryAR: 'البناء والبنية التحتية',
                 nameEN: 'Eng. Ziad Al-Manaseer', nameAR: 'المهندس زياد المناصير',
                 titleEN: 'Chairman | Manaseer Group', titleAR: 'رئيس مجلس الإدارة | مجموعة المناصير',
@@ -213,7 +206,7 @@
                 globalAR: 'إقامة تحالفات استراتيجية مع شركات هندسية أوروبية لجلب أحدث تقنيات البناء والاستثمار الأجنبي المباشر إلى عمّان.'
             },
             {
-                id: 2, img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+                id: 2, img: 'https://ui-avatars.com/api/?name=Khaled+Al-Masri&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Construction & Infrastructure', industryAR: 'البناء والبنية التحتية',
                 nameEN: 'Khaled Al-Masri', nameAR: 'خالد المصري',
                 titleEN: 'Chairman | Astra Group', titleAR: 'رئيس مجلس الإدارة | مجموعة أسترا',
@@ -225,7 +218,7 @@
                 globalAR: 'وضع الأردن كمركز إقليمي للشركات من خلال تطوير مقرات عالمية المستوى تجذب الشركات متعددة الجنسيات.'
             },
             {
-                id: 3, img: 'https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=400&q=80',
+                id: 3, img: 'https://ui-avatars.com/api/?name=Osama+Al-Khatib&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Construction & Infrastructure', industryAR: 'البناء والبنية التحتية',
                 nameEN: 'Osama Al-Khatib', nameAR: 'أسامة الخطيب',
                 titleEN: 'CEO | Middle East Joint Ventures (JV)', titleAR: 'الرئيس التنفيذي | مشاريع الشرق الأوسط المشتركة',
@@ -236,10 +229,8 @@
                 globalEN: 'Coordinates seamlessly with Asian and Western stakeholders to ensure massive infrastructure joint ventures operate without cross-cultural friction.',
                 globalAR: 'ينسق بسلاسة مع الشركاء الآسيويين والغربيين لضمان تشغيل المشاريع المشتركة الضخمة للبنية التحتية دون أي احتكاك ثقافي.'
             },
-
-            // --- Catering & F&B ---
             {
-                id: 4, img: 'https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=400&q=80',
+                id: 4, img: 'https://ui-avatars.com/api/?name=Ahmad+Zalatimo&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Catering & F&B', industryAR: 'المطاعم والضيافة',
                 nameEN: 'Ahmad Zalatimo', nameAR: 'أحمد زلاطيمو',
                 titleEN: 'Chairman | Zalatimo Brothers', titleAR: 'رئيس مجلس الإدارة | إخوان زلاطيمو',
@@ -251,7 +242,7 @@
                 globalAR: 'نجح في ترسيخ العلامة التجارية كهدية مؤسسية أردنية بامتياز على مستوى العالم، وتصدير المنتجات التراثية الفاخرة عبر دول الخليج وأوروبا.'
             },
             {
-                id: 5, img: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=400&q=80',
+                id: 5, img: 'https://ui-avatars.com/api/?name=Zaid+Goussous&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Catering & F&B', industryAR: 'المطاعم والضيافة',
                 nameEN: 'Zaid Goussous', nameAR: 'زيد قسوس',
                 titleEN: 'Founder | Romero Group', titleAR: 'المؤسس | مجموعة روميرو',
@@ -263,7 +254,7 @@
                 globalAR: 'الشراكة مع طهاة عالميين مشهورين للارتقاء بمشهد الطهي في الأردن، وجذب نقاد الطعام الدوليين وسياحة الطهي.'
             },
             {
-                id: 6, img: 'https://images.unsplash.com/photo-1583160247711-2191776b4b91?auto=format&fit=crop&w=400&q=80',
+                id: 6, img: 'https://ui-avatars.com/api/?name=Omar+Al-Bateel&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Catering & F&B', industryAR: 'المطاعم والضيافة',
                 nameEN: 'Omar Al-Bateel', nameAR: 'عمر البتيل',
                 titleEN: 'Director | Premium F&B Supply', titleAR: 'المدير | توريد الأغذية الفاخرة',
@@ -274,10 +265,8 @@
                 globalEN: 'Bridges international food supply chains with local execution, delivering world-class bespoke dining logistics across the MENA region.',
                 globalAR: 'يربط سلاسل توريد الأغذية الدولية بالتنفيذ المحلي، ويقدم لوجستيات طعام مخصصة عالمية المستوى في جميع أنحاء منطقة الشرق الأوسط وشمال أفريقيا.'
             },
-
-            // --- Tourism & Hospitality ---
             {
-                id: 7, img: 'https://images.unsplash.com/photo-1542314831-c6a4d27160c9?auto=format&fit=crop&w=400&q=80',
+                id: 7, img: 'https://ui-avatars.com/api/?name=Nadim+Muasher&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Tourism & Hospitality', industryAR: 'السياحة والفنادق',
                 nameEN: 'Nadim Muasher', nameAR: 'نديم المعشر',
                 titleEN: 'Chairman | Arab International Hotels', titleAR: 'رئيس مجلس الإدارة | الفنادق العربية الدولية',
@@ -289,7 +278,7 @@
                 globalAR: 'يلعب دوراً محورياً في هيئة تنشيط السياحة الأردنية، ويسوق بقوة للمملكة أمام المستثمرين ذوي الملاءة المالية العالية وشبكات السفر الفاخرة العالمية.'
             },
             {
-                id: 8, img: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?auto=format&fit=crop&w=400&q=80',
+                id: 8, img: 'https://ui-avatars.com/api/?name=Michael+Nazzal&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Tourism & Hospitality', industryAR: 'السياحة والفنادق',
                 nameEN: 'Michael Nazzal', nameAR: 'ميشيل نزال',
                 titleEN: 'Chairman | Jordan Hotel Association', titleAR: 'رئيس مجلس الإدارة | جمعية الفنادق الأردنية',
@@ -301,7 +290,7 @@
                 globalAR: 'يمثل الأردن في نقابات السفر العالمية، مما يضمن بقاء البلاد وجهة رئيسية وآمنة وغنية ثقافياً على خريطة العالم.'
             },
             {
-                id: 9, img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80',
+                id: 9, img: 'https://ui-avatars.com/api/?name=Majed+Shocair&background=D4AF37&color=fff&size=256&font-size=0.4&bold=true',
                 industryEN: 'Tourism & Hospitality', industryAR: 'السياحة والفنادق',
                 nameEN: 'Majed Shocair', nameAR: 'ماجد شقير',
                 titleEN: 'CEO | Elite Travel & Corporate Management', titleAR: 'الرئيس التنفيذي | النخبة لإدارة السفر والشركات',
@@ -314,7 +303,6 @@
             }
         ];
 
-        // ================= Core Logic =================
         let currentLang = 'en';
         let currentModalData = null;
 
@@ -372,11 +360,16 @@
                     const title = currentLang === 'en' ? person.titleEN : person.titleAR;
                     const btnText = staticText[currentLang].viewBtn;
 
+                    // 注入全新的深色背景+圆形悬浮头像排版
                     card.innerHTML = `
-                        <div class="card-img" style="background-image: url('${person.img}')"></div>
+                        <div class="card-header">
+                            <div class="card-avatar" style="background-image: url('${person.img}')"></div>
+                        </div>
                         <div class="card-content">
-                            <h3 class="chairman-name">${name}</h3>
-                            <p class="chairman-title">${title}</p>
+                            <div>
+                                <h3 class="chairman-name">${name}</h3>
+                                <p class="chairman-title">${title}</p>
+                            </div>
                             <span class="btn-view">${btnText}</span>
                         </div>
                     `;
@@ -422,7 +415,6 @@
             }
         }
 
-        // Initialize
         updateStaticText();
         renderGrid();
     </script>
